@@ -14,29 +14,46 @@ class ChessGUI(object):
 		pygame.display.set_caption('Chess')
 		self.play_gui()
 
-	def make_chess_board(self):
+		self.piece_paths = self.get_piece_paths()
+		self.piece_images = self.load_images
+
+
+
+	def draw_chess_board(self):
 
 		for i in range(8):
 			for j in range(8):
 
-				if True:
-					self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
+				if i%2 == 0:
+					if j%2 == 0:
+						self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
 
-				else:
-					self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
+					else:
+						self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
+
+				elif i%2 != 0:
+					if j%2 != 0:
+						self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
+
+					else:
+						self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
 
 
 
-		
-		
+	def draw_pieces(self, board):
+		pass
 
-		pygame.display.flip()
+	def draw_piece(self, symbol, x, y):
+
 
 	def load_images(self):
 		self.darkSquare = pygame.image.load('chess_assets/square_graydark.png')
 		self.darkSquare = pygame.transform.scale(self.darkSquare, (int(self.screenX/8), int(self.screenY/8)))
 		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png')
 		self.lightSquare = pygame.transform.scale(self.lightSquare, (int(self.screenX/8), int(self.screenY/8)))
+
+		for key in self.piece_paths:
+
 
 
 	def play_gui(self):
@@ -56,9 +73,16 @@ class ChessGUI(object):
 		        elif event.type == QUIT:
 		            running = False
 
-		    self.make_chess_board()
+		    self.draw_chess_board()
+		    pygame.display.flip()
 
-chess_gui = ChessGUI(800)
+
+	def get_piece_paths(self):
+		piece_paths = {}
+
+
+
+chess_gui = ChessGUI(720)
 
 
 
