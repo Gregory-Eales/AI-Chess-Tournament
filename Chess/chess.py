@@ -82,6 +82,7 @@ class Chess(object):
 				if self.check_legal(move):
 					deciding_turn=False
 					self.change_turn()
+				
 
 					
 
