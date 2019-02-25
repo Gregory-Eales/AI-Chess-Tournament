@@ -4,19 +4,39 @@ from pygame.locals import *
 
 class ChessGUI(object):
 
-	def __init__(self):
+	def __init__(self, size):
 
 		pygame.init()
-		self.screen = pygame.display.set_mode((800, 600))
+		self.screenX = size
+		self.screenY = size
+		self.screen = pygame.display.set_mode((size, size))
+		self.load_images()
 		pygame.display.set_caption('Chess')
 		self.play_gui()
 
+	def make_chess_board(self):
+
+		for i in range(8):
+			for j in range(8):
+
+				if True:
+					self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
+
+				else:
+					self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
 
 
-	def chess_board(self, x, y):
-		pass
 
-	
+		
+		
+
+		pygame.display.flip()
+
+	def load_images(self):
+		self.darkSquare = pygame.image.load('chess_assets/square_graydark.png')
+		self.darkSquare = pygame.transform.scale(self.darkSquare, (int(self.screenX/8), int(self.screenY/8)))
+		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png')
+		self.lightSquare = pygame.transform.scale(self.lightSquare, (int(self.screenX/8), int(self.screenY/8)))
 
 
 	def play_gui(self):
@@ -36,7 +56,9 @@ class ChessGUI(object):
 		        elif event.type == QUIT:
 		            running = False
 
-chess_gui = ChessGUI()
+		    self.make_chess_board()
+
+chess_gui = ChessGUI(800)
 
 
 
