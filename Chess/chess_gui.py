@@ -26,7 +26,7 @@ class ChessGUI(object):
 
 		self.screen.blit(self.chess_background, (0, 0))
 		
-		
+
 		"""
 		for i in range(8):
 			for j in range(8):
@@ -104,6 +104,9 @@ class ChessGUI(object):
 		    	self.draw_piece(self.piece_being_held, pos[0], pos[1], held=True)
 	
 		    pygame.display.flip()
+
+		    pygame.image.save(self.screen, "example_game.png")
+		    running = False
 
 
 	def act_on_piece(self, x, y):
