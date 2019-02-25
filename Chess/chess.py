@@ -25,8 +25,21 @@ class Chess(object):
 
 
 	def print_board(self):
+		print("-------------------------------------")
 		for i in range(8):
-			print(self.board[i])
+
+			for j in range(8):
+				if j == 0:
+					print("|", self.board[i][j], " ", end =" ")
+				if j == 7:
+					print(self.board[i][j], "|")
+				else:
+					print(self.board[i][j], " ", end =" ")
+
+			if i!=7:
+				print("|                                   |")
+
+		print("-------------------------------------")
 
 	# runs the main game loop
 	def play(self):
