@@ -4,7 +4,7 @@ This is a battle between the top AI algorithms made from scratch, for the title 
 
 ## Content
 * Algorithms: source file for Algorithms
-* Data: Data processing and aquisition
+* Data: data processing and aquisition
 * Chess: self made chess gui + cython accelerated training enviroment
 ## License
 
