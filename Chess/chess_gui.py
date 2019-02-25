@@ -1,21 +1,23 @@
 import pygame
 from pygame.locals import *
+from chess import Chess
 
 
 class ChessGUI(object):
 
-	def __init__(self, size):
+	def __init__(self, size, sample_board):
 
+		self.sample_board = sample_board
 		pygame.init()
 		self.screenX = size
 		self.screenY = size
 		self.screen = pygame.display.set_mode((size, size))
-		self.load_images()
+		self.piece_paths = self.get_piece_paths()
+		self.piece_images = self.load_images()
 		pygame.display.set_caption('Chess')
 		self.play_gui()
 
-		self.piece_paths = self.get_piece_paths()
-		self.piece_images = self.load_images
+		
 
 
 
@@ -41,10 +43,13 @@ class ChessGUI(object):
 
 
 	def draw_pieces(self, board):
-		pass
+		for i in range(8):
+			for j in range(8):
+				if board[j][i] != '.':
+					self.draw_piece(board[j][i], x=i, y=j)
 
 	def draw_piece(self, symbol, x, y):
-
+		self.screen.blit(self.piece_images[symbol], (x*int(self.screenX/8), y*int(self.screenX/8)))
 
 	def load_images(self):
 		self.darkSquare = pygame.image.load('chess_assets/square_graydark.png')
@@ -52,9 +57,12 @@ class ChessGUI(object):
 		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png')
 		self.lightSquare = pygame.transform.scale(self.lightSquare, (int(self.screenX/8), int(self.screenY/8)))
 
+		piece_images = {}
 		for key in self.piece_paths:
+			piece_images[key] = pygame.image.load(self.piece_paths[key])
+			piece_images[key] = pygame.transform.scale(piece_images[key], (int(self.screenX/8), int(self.screenY/8)))
 
-
+		return piece_images
 
 	def play_gui(self):
 		# Variable to keep our main loop running
@@ -74,15 +82,28 @@ class ChessGUI(object):
 		            running = False
 
 		    self.draw_chess_board()
+		    self.draw_pieces(self.sample_board)
 		    pygame.display.flip()
 
 
 	def get_piece_paths(self):
 		piece_paths = {}
+		piece_paths["b"] = "chess_assets/b_bishop.png"
+		piece_paths["B"] = "chess_assets/w_bishop.png"
+		piece_paths["r"] = "chess_assets/b_rook.png"
+		piece_paths["R"] = "chess_assets/w_rook.png"
+		piece_paths["h"] = "chess_assets/b_knight.png"
+		piece_paths["H"] = "chess_assets/w_knight.png"
+		piece_paths["q"] = "chess_assets/b_queen.png"
+		piece_paths["Q"] = "chess_assets/w_queen.png"
+		piece_paths["p"] = "chess_assets/b_pawn.png"
+		piece_paths["P"] = "chess_assets/w_pawn.png"
+		piece_paths["k"] = "chess_assets/b_king.png"
+		piece_paths["K"] = "chess_assets/w_king.png"
+		return piece_paths
 
 
 
-chess_gui = ChessGUI(720)
-
-
+chss = Chess()
+chess_gui = ChessGUI(720, chss.board)
 

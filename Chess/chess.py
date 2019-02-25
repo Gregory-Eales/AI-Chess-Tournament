@@ -82,7 +82,7 @@ class Chess(object):
 				if self.check_legal(move):
 					deciding_turn=False
 					self.change_turn()
-				
+
 
 					
 
@@ -132,7 +132,7 @@ class Chess(object):
 		if self.turn == "black":
 			self.turn = "white"
 
+if __name__ == '__main__':
+	chss = Chess()
+	chss.play()
 
-
-chss = Chess()
-chss.play()
