@@ -14,12 +14,17 @@ class Chess(object):
 		black_pawn = ["p", "p", "p", "p", "p", "p", "p", "p"]
 		white_back = ["R", "H", "B", "Q", "K", "B", "H", "R"]
 		black_back = ["r", "h", "b", "q", "k", "b", "h", "r"]
-		empty = [".", ".", ".", ".", ".", ".", ".", "."]
+		empty1 = [".", ".", ".", ".", ".", ".", ".", "."]
+		empty2 = [".", ".", ".", ".", ".", ".", ".", "."]
+		empty3 = [".", ".", ".", ".", ".", ".", ".", "."]
+		empty4 = [".", ".", ".", ".", ".", ".", ".", "."]
 
 		board.append(white_back)
 		board.append(white_pawn)
-		for i in range(4):
-			board.append(empty)
+		board.append(empty1)
+		board.append(empty2)
+		board.append(empty3)
+		board.append(empty4)
 		board.append(black_pawn)
 		board.append(black_back)
 		return board
@@ -69,8 +74,10 @@ class Chess(object):
 
 
 			while deciding_turn:
+				self.print_board()
 
 				move = self.get_player_move()
+
 
 				if self.check_legal(move):
 					deciding_turn=False
@@ -83,7 +90,15 @@ class Chess(object):
 
 	# gets the player move irl
 	def get_player_move(self):
-
+		print("Its", self.turn, "to move")
+		piece = input("which peice would you like to move: ")
+		piece_pos = [int(piece[0])-1, int(piece[1])-1]
+		piece_type = self.board[piece_pos[0]][piece_pos[1]]
+		self.board[piece_pos[0]][piece_pos[1]] = "."
+		new_pos = input("Where would you like to move: ")
+		new_pos = [int(new_pos[0])-1, int(new_pos[1])-1]
+		self.board[new_pos[0]][new_pos[1]] = piece_type
+		
 
 
 	# returns board state
@@ -110,7 +125,7 @@ class Chess(object):
 	def move_peice(self):
 		pass
 
-	def self.change_turn():
+	def change_turn(self):
 		if self.turn == "white":
 			self.turn = "black"
 		if self.turn == "black":
@@ -119,4 +134,4 @@ class Chess(object):
 
 
 chss = Chess()
-chss.print_board()
+chss.play()
