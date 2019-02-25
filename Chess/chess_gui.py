@@ -24,6 +24,10 @@ class ChessGUI(object):
 
 	def draw_chess_board(self):
 
+		self.screen.blit(self.chess_background, (0, 0))
+		
+		
+		"""
 		for i in range(8):
 			for j in range(8):
 
@@ -40,7 +44,7 @@ class ChessGUI(object):
 
 					else:
 						self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
-
+		"""
 
 
 	def draw_pieces(self, board):
@@ -62,6 +66,7 @@ class ChessGUI(object):
 		self.darkSquare = pygame.transform.scale(self.darkSquare, (int(self.screenX/8), int(self.screenY/8)))
 		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png')
 		self.lightSquare = pygame.transform.scale(self.lightSquare, (int(self.screenX/8), int(self.screenY/8)))
+		self.chess_background = pygame.image.load('chess_assets/chess_background.png')
 
 		piece_images = {}
 		for key in self.piece_paths:
@@ -76,7 +81,7 @@ class ChessGUI(object):
 		# Our main loop!
 		while running:
 		    # for loop through the event queue
-		    pygame.event.wait()
+
 		    for event in pygame.event.get():
 		        # Check for KEYDOWN event; KEYDOWN is a constant defined in pygame.locals, which we imported earlier
 		        if event.type == KEYDOWN:
