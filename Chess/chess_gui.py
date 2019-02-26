@@ -105,8 +105,6 @@ class ChessGUI(object):
 	
 		    pygame.display.flip()
 
-		    pygame.image.save(self.screen, "example_game.png")
-		    running = False
 
 
 	def act_on_piece(self, x, y):
