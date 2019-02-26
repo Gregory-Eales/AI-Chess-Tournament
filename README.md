@@ -2,6 +2,10 @@
 
 This is a battle between the top AI algorithms made from scratch, for the title of chess champion
 
+<p align="left">
+  <img src="https://github.com/Gregory-Eales/AI-Chess-Tournament/blob/master/Chess/example_game.png" width="500"/>
+</p>
+
 ## Content
 * Algorithms: source file for Algorithms
 * Data: data processing and aquisition
