@@ -23,29 +23,7 @@ class ChessGUI(object):
 		
 
 	def draw_chess_board(self):
-
 		self.screen.blit(self.chess_background, (0, 0))
-		
-
-		"""
-		for i in range(8):
-			for j in range(8):
-
-				if i%2 == 0:
-					if j%2 == 0:
-						self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
-
-					else:
-						self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
-
-				elif i%2 != 0:
-					if j%2 != 0:
-						self.screen.blit(self.darkSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
-
-					else:
-						self.screen.blit(self.lightSquare, (i*int(self.screenX/8), j*int(self.screenX/8)))
-		"""
-
 
 	def draw_pieces(self, board):
 		for i in range(8):
@@ -126,7 +104,6 @@ class ChessGUI(object):
 
 
 		elif not self.holding_piece:
-			print("You clicked")
 			self.piece_being_held = self.sample_board[sectorY][sectorX]
 			self.sample_board[sectorY][sectorX] = "."
 			self.holding_piece = True
@@ -136,7 +113,6 @@ class ChessGUI(object):
 			self.piece_being_held = None
 			self.holding_piece = False
 
-		
 	def get_piece_paths(self):
 		piece_paths = {}
 		piece_paths["b"] = "chess_assets/b_bishop.png"
@@ -155,6 +131,6 @@ class ChessGUI(object):
 
 
 
-chss = Chess()
-chess_gui = ChessGUI(720, chss.board)
+chess = Chess()
+chess_gui = ChessGUI(720, chess.board)
 

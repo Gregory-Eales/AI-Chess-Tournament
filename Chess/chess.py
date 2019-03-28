@@ -82,6 +82,8 @@ class Chess(object):
 				if self.check_legal(move):
 					deciding_turn=False
 					self.change_turn()
+				else:
+					print("Invalid Move, Try Again")
 
 
 					
@@ -99,6 +101,7 @@ class Chess(object):
 		new_pos = input("Where would you like to move: ")
 		new_pos = [int(new_pos[0])-1, int(new_pos[1])-1]
 		self.board[new_pos[0]][new_pos[1]] = piece_type
+		return [piece_type, piece_pos, new_pos]
 		
 
 
@@ -116,6 +119,7 @@ class Chess(object):
 
 	# check if move is legal
 	def check_legal(self, move):
+		piece_type, piece_pos, new_pos = move[0], move[1], move[2]   
 		return True
 
 	# check if anyones in check
