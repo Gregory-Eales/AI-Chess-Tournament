@@ -119,7 +119,27 @@ class Chess(object):
 
 	# check if move is legal
 	def check_legal(self, move):
-		piece_type, piece_pos, new_pos = move[0], move[1], move[2]   
+		piece_type, piece_pos, new_pos = move[0], move[1], move[2]
+		print(piece_type, piece_pos, new_pos)
+
+		if piece_type.lower() == "p":
+			pass
+
+		if piece_type.lower() == "r":
+			pass
+
+		if piece_type.lower() == "h":
+			pass
+
+		if piece_type.lower() == "b":
+			pass
+
+		if piece_type.lower() == "k":
+			pass
+
+		if piece_type.lower() == "q":
+			pass
+
 		return True
 
 	# check if anyones in check
