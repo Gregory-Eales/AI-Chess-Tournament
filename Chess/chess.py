@@ -85,12 +85,6 @@ class Chess(object):
 				else:
 					print("Invalid Move, Try Again")
 
-
-					
-
-
-			
-
 	# gets the player move irl
 	def get_player_move(self):
 		print("Its", self.turn, "to move")
@@ -123,10 +117,23 @@ class Chess(object):
 		print(piece_type, piece_pos, new_pos)
 
 		if piece_type.lower() == "p":
-			pass
+			if piece_type.lower() == piece_type:
+				if piece_pos[1] == new_pos[1] + 1 and piece_pos[0] == new_pos[0]:
+					return self.check_new_location(new_pos, "black")
+
+			else:
+				if piece_pos[1] == new_pos[1] - 1 and piece_pos[0] == new_pos[0]:
+					return self.check_new_location(new_pos, "white")
+
 
 		if piece_type.lower() == "r":
-			pass
+			if piece_type.lower() == piece_type:
+				if piece_pos[0] == new_pos[0] or piece_pos[1] == new_pos[1]:
+					return self.check_new_location(new_pos, "black")
+
+			else:
+				if piece_pos[0] == new_pos[0] or piece_pos[1] == new_pos[1]:
+					return self.check_new_location(new_pos, "white")
 
 		if piece_type.lower() == "h":
 			pass
@@ -140,7 +147,24 @@ class Chess(object):
 		if piece_type.lower() == "q":
 			pass
 
+		if piece_type.lower() == ".":
+			pass
+
 		return True
+
+	def check_new_location(self, loc, color):
+		new_pos_type = self.board[loc[0]][loc[1]]
+		if new_pos_type.lower() == new_pos_type:
+			new_color = "white"
+
+
+		else:
+			new_color = "black"
+			if new_color == color:
+				return False
+
+			else:
+				return True
 
 	# check if anyones in check
 	def check_if_check(self):
