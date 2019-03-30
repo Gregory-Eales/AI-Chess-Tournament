@@ -136,16 +136,31 @@ class Chess(object):
 					return self.check_new_location(new_pos, "white")
 
 		if piece_type.lower() == "h":
-			pass
+			if piece_type.lower() == piece_type:
+				pass
+
+			else pass
 
 		if piece_type.lower() == "b":
-			pass
+			if piece_type.lower() == piece_type:
+				pass
+
+			else:
+				pass
 
 		if piece_type.lower() == "k":
-			pass
+			if piece_type.lower() == piece_type:
+				pass
+
+			else:
+				pass
 
 		if piece_type.lower() == "q":
-			pass
+			if piece_type.lower() == piece_type:
+				pass
+
+			else:
+				pass
 
 		if piece_type.lower() == ".":
 			pass
