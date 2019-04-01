@@ -129,6 +129,18 @@ class Chess(object):
 					return self.check_new_location(new_pos, "white")
 
 
+			if piece_type.lower() == piece_type:
+				print(new_pos[1] + 2, piece_pos[1])
+				if piece_pos[1] == new_pos[1] + 2 and piece_pos[0] == new_pos[0]:
+					return self.check_new_location(new_pos, "black")
+
+
+			else:
+				print(new_pos[1] - 2, piece_pos[1])
+				if piece_pos[1] == new_pos[1] - 2 and piece_pos[0] == new_pos[0]:
+					return self.check_new_location(new_pos, "white")
+
+
 		if piece_type.lower() == "r":
 			if piece_type.lower() == piece_type:
 				if piece_pos[0] == new_pos[0] or piece_pos[1] == new_pos[1]:
