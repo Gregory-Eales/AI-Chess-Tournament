@@ -139,7 +139,8 @@ class Chess(object):
 			if piece_type.lower() == piece_type:
 				pass
 
-			else pass
+			else:
+				pass
 
 		if piece_type.lower() == "b":
 			if piece_type.lower() == piece_type:
