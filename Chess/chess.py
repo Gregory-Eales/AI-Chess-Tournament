@@ -118,10 +118,13 @@ class Chess(object):
 
 		if piece_type.lower() == "p":
 			if piece_type.lower() == piece_type:
+				print(new_pos[1] + 1, piece_pos[1])
 				if piece_pos[1] == new_pos[1] + 1 and piece_pos[0] == new_pos[0]:
 					return self.check_new_location(new_pos, "black")
 
+
 			else:
+				print(new_pos[1] - 1, piece_pos[1])
 				if piece_pos[1] == new_pos[1] - 1 and piece_pos[0] == new_pos[0]:
 					return self.check_new_location(new_pos, "white")
 
@@ -137,10 +140,27 @@ class Chess(object):
 
 		if piece_type.lower() == "h":
 			if piece_type.lower() == piece_type:
-				pass
+				if piece_pos[0] == new_pos[0] + 2 or piece_pos[0] == new_pos[0] - 2:
+					print("cond 1")
+					if piece_pos[1] == new_pos[1] + 1 or piece_pos[1] == new_pos[1] - 1:
+						print("cond 2")
+						return self.check_new_location(new_pos, "black")
 
+					
+				if piece_pos[1] == new_pos[1] + 2 or piece_pos[1] == new_pos[1] - 2:
+					print("cond 3")
+					if piece_pos[0] == new_pos[0] + 1 or piece_pos[0] == new_pos[0] - 1:
+						print("cond 4")
+						return self.check_new_location(new_pos, "black")
 			else:
-				pass
+				if piece_pos[0] == new_pos[0] + 2 or piece_pos[0] == new_pos[0] - 2:
+					if piece_pos[1] == new_pos[1] + 1 or piece_pos[1] == new_pos[1] - 1:
+						return self.check_new_location(new_pos, "white")
+
+					
+				if piece_pos[1] == new_pos[1] + 2 or piece_pos[1] == new_pos[1] - 2:
+					if piece_pos[0] == new_pos[0] + 1 or piece_pos[0] == new_pos[0] - 1:
+						return self.check_new_location(new_pos, "white")
 
 		if piece_type.lower() == "b":
 			if piece_type.lower() == piece_type:
@@ -166,21 +186,30 @@ class Chess(object):
 		if piece_type.lower() == ".":
 			pass
 
-		return True
+		return False
 
 	def check_new_location(self, loc, color):
-		new_pos_type = self.board[loc[0]][loc[1]]
-		if new_pos_type.lower() == new_pos_type:
+		new_pos_type = self.board[loc[1]][loc[0]]
+		new_color = None
+
+
+
+
+		if new_pos_type.lower() == new_pos_type and new_pos_type != ".":
+			new_color = "black"
+
+		elif new_pos_type != ".":
 			new_color = "white"
 
+		if color != new_color:
+			return True
 
 		else:
-			new_color = "black"
-			if new_color == color:
-				return False
+			print("Failed")
+			print(color, new_color, new_pos_type)
+			return False
+		
 
-			else:
-				return True
 
 	# check if anyones in check
 	def check_if_check(self):

@@ -10,6 +10,7 @@ class ChessGUI(object):
 
 		self.sample_board = sample_board
 		pygame.init()
+		self.Chess = Chess()
 		self.screenX = size
 		self.screenY = size
 		self.screen = pygame.display.set_mode((size, size))
@@ -104,14 +105,19 @@ class ChessGUI(object):
 
 
 		elif not self.holding_piece:
+			self.picked_up_at = [sectorX, sectorY]
 			self.piece_being_held = self.sample_board[sectorY][sectorX]
 			self.sample_board[sectorY][sectorX] = "."
 			self.holding_piece = True
 
 		elif self.holding_piece:
-			self.sample_board[sectorY][sectorX] = self.piece_being_held
-			self.piece_being_held = None
-			self.holding_piece = False
+
+			move = [ self.piece_being_held, self.picked_up_at, [sectorX, sectorY]]
+
+			if self.Chess.check_legal(move):
+				self.sample_board[sectorY][sectorX] = self.piece_being_held
+				self.piece_being_held = None
+				self.holding_piece = False
 
 	def get_piece_paths(self):
 		piece_paths = {}
