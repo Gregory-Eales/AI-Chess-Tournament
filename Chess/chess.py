@@ -132,13 +132,15 @@ class Chess(object):
 			if piece_type.lower() == piece_type:
 				print(new_pos[1] + 2, piece_pos[1])
 				if piece_pos[1] == new_pos[1] + 2 and piece_pos[0] == new_pos[0]:
-					return self.check_new_location(new_pos, "black")
+					if piece_pos[1] == 8:
+						return self.check_new_location(new_pos, "black")
 
 
 			else:
 				print(new_pos[1] - 2, piece_pos[1])
 				if piece_pos[1] == new_pos[1] - 2 and piece_pos[0] == new_pos[0]:
-					return self.check_new_location(new_pos, "white")
+					if piece_pos[1] == 1:
+						return self.check_new_location(new_pos, "white")
 
 
 		if piece_type.lower() == "r":
@@ -176,10 +178,20 @@ class Chess(object):
 
 		if piece_type.lower() == "b":
 			if piece_type.lower() == piece_type:
-				pass
+				
+				for i in range(8):
+
+					if piece_pos[0] == new_pos[0] + i or piece_pos[0] == new_pos[0] - i:
+						if piece_pos[1] == new_pos[1] + i or piece_pos[1] == new_pos[1] - i:
+							return self.check_new_location(new_pos, "black")
+
 
 			else:
-				pass
+				for i in range(8):
+
+					if piece_pos[0] == new_pos[0] + i or piece_pos[0] == new_pos[0] - i:
+						if piece_pos[1] == new_pos[1] + i or piece_pos[1] == new_pos[1] - i:
+							return self.check_new_location(new_pos, "white")
 
 		if piece_type.lower() == "k":
 			if piece_type.lower() == piece_type:
@@ -194,10 +206,27 @@ class Chess(object):
 
 		if piece_type.lower() == "q":
 			if piece_type.lower() == piece_type:
-				pass
+
+				if piece_pos[0] == new_pos[0] or piece_pos[1] == new_pos[1]:
+					return self.check_new_location(new_pos, "black")
+
+
+				for i in range(8):
+					if piece_pos[0] == new_pos[0] + i or piece_pos[0] == new_pos[0] - i:
+						if piece_pos[1] == new_pos[1] + i or piece_pos[1] == new_pos[1] - i:
+							return self.check_new_location(new_pos, "black")
 
 			else:
-				pass
+
+				if piece_pos[0] == new_pos[0] or piece_pos[1] == new_pos[1]:
+					return self.check_new_location(new_pos, "white")
+
+				for i in range(8):
+
+					if piece_pos[0] == new_pos[0] + i or piece_pos[0] == new_pos[0] - i:
+						if piece_pos[1] == new_pos[1] + i or piece_pos[1] == new_pos[1] - i:
+							return self.check_new_location(new_pos, "white")
+				
 
 		if piece_type.lower() == ".":
 			pass
