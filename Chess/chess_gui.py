@@ -4,6 +4,7 @@ from chess import Chess
 import time
 
 
+
 class ChessGUI(object):
 
 	def __init__(self, size, sample_board):
@@ -13,15 +14,16 @@ class ChessGUI(object):
 		self.Chess = Chess()
 		self.screenX = size
 		self.screenY = size
-		self.screen = pygame.display.set_mode((size, size))
+		#flags = FULLSCREEN | DOUBLEBUF
+		flags = DOUBLEBUF
+		self.screen = pygame.display.set_mode((size, size), flags)
+		self.screen.set_alpha(None)
 		self.piece_paths = self.get_piece_paths()
 		self.piece_images = self.load_images()
 		self.piece_being_held = None
 		self.holding_piece = False
 		pygame.display.set_caption('Chess')
 		self.play_gui()
-
-		
 
 	def draw_chess_board(self):
 		self.screen.blit(self.chess_background, (0, 0))
@@ -35,30 +37,33 @@ class ChessGUI(object):
 	def draw_piece(self, symbol, x, y, held=False):
 
 		if held == True:
-			self.screen.blit(self.piece_images[symbol], (x, y))
-			return 0
-
-		self.screen.blit(self.piece_images[symbol], (x*int(self.screenX/8), y*int(self.screenX/8)))
+			return self.screen.blit(self.piece_images[symbol], (x, y))
+			
+		else:
+			self.screen.blit(self.piece_images[symbol], (x*int(self.screenX/8), y*int(self.screenX/8)))
 
 	def load_images(self):
-		self.darkSquare = pygame.image.load('chess_assets/square_graydark.png')
+		self.darkSquare = pygame.image.load('chess_assets/square_graydark.png').convert_alpha()
 		self.darkSquare = pygame.transform.scale(self.darkSquare, (int(self.screenX/8), int(self.screenY/8)))
-		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png')
+		self.lightSquare = pygame.image.load('chess_assets/square_graylight.png').convert_alpha()
 		self.lightSquare = pygame.transform.scale(self.lightSquare, (int(self.screenX/8), int(self.screenY/8)))
-		self.chess_background = pygame.image.load('chess_assets/chess_background.png')
+		self.chess_background = pygame.image.load('chess_assets/chess_background.png').convert_alpha()
 
 		piece_images = {}
 		for key in self.piece_paths:
-			piece_images[key] = pygame.image.load(self.piece_paths[key])
+			piece_images[key] = pygame.image.load(self.piece_paths[key]).convert_alpha()
 			piece_images[key] = pygame.transform.scale(piece_images[key], (int(self.screenX/8), int(self.screenY/8)))
 
 		return piece_images
 
 	def play_gui(self):
+		clock = pygame.time.Clock()
+		condition = True
 		# Variable to keep our main loop running
 		running = True
 		# Our main loop!
 		while running:
+
 		    # for loop through the event queue
 
 		    for event in pygame.event.get():
@@ -67,22 +72,36 @@ class ChessGUI(object):
 		            # If the Esc key has been pressed set running to false to exit the main loop
 		            if event.key == K_ESCAPE:
 		                running = False
-
-		        if event.type == pygame.MOUSEBUTTONUP:
+		        
+		        elif event.type == pygame.MOUSEBUTTONUP:
 		        	pos = pygame.mouse.get_pos()
 		        	self.act_on_piece(pos[0], pos[1])
+		        
 		        # Check for QUIT event; if QUIT, set running to false
 		        elif event.type == QUIT:
 		            running = False
-
-		    self.draw_chess_board()
-		    self.draw_pieces(self.sample_board)
+		    
 		    if self.holding_piece:
+		    	condition = True
+		    	self.screen.blit(self.image_placehold, (0, 0))
 		    	pos = pygame.mouse.get_pos()
-		    	pos = (pos[0] - self.screenX/16, pos[1] - self.screenX/16)
-		    	self.draw_piece(self.piece_being_held, pos[0], pos[1], held=True)
-	
-		    pygame.display.flip()
+		    	pygame.display.update(self.screen.blit(self.piece_images[self.piece_being_held], (pos[0]-self.screenX/16, pos[1]-self.screenX/16)))
+		    	clock.tick(1000)
+		    	print(clock.get_fps())
+		
+
+
+		    elif not self.holding_piece and condition:
+		    	self.draw_chess_board()
+		    	self.draw_pieces(self.sample_board)
+		    	pygame.display.flip()
+		    	clock.tick(5)
+		    	print(clock.get_fps())
+		    	condition = False
+
+		    else:
+		    	clock.tick(5)
+		    	print(clock.get_fps())
 
 
 
@@ -110,6 +129,12 @@ class ChessGUI(object):
 			self.piece_being_held = self.sample_board[sectorY][sectorX]
 			self.sample_board[sectorY][sectorX] = "."
 			self.holding_piece = True
+			self.draw_chess_board()
+			self.draw_pieces(self.sample_board)
+			pygame.display.flip()
+			pygame.image.save(self.screen, "image_placehold.jpeg")
+			self.image_placehold = pygame.image.load("image_placehold.jpeg").convert()
+
 
 		elif self.holding_piece:
 
