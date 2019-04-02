@@ -87,6 +87,7 @@ class ChessGUI(object):
 
 
 	def act_on_piece(self, x, y):
+		self.Chess.board = self.sample_board
 		sectorX = x/(self.screenX/8)
 		sectorY = y/(self.screenY/8)
 		for i in range(9):

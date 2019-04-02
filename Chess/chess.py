@@ -183,10 +183,14 @@ class Chess(object):
 
 		if piece_type.lower() == "k":
 			if piece_type.lower() == piece_type:
-				pass
+				if piece_pos[0] == new_pos[0] + 1 or piece_pos[0] == new_pos[0] - 1 or piece_pos[0] == new_pos[0]:
+					if piece_pos[1] == new_pos[1] + 1 or piece_pos[1] == new_pos[1] - 1 or piece_pos[1] == new_pos[1]:
+						return self.check_new_location(new_pos, "black")
 
 			else:
-				pass
+				if piece_pos[0] == new_pos[0] + 1 or piece_pos[0] == new_pos[0] - 1 or piece_pos[0] == new_pos[0]:
+					if piece_pos[1] == new_pos[1] + 1 or piece_pos[1] == new_pos[1] - 1 or piece_pos[1] == new_pos[1]:
+						return self.check_new_location(new_pos, "white")
 
 		if piece_type.lower() == "q":
 			if piece_type.lower() == piece_type:
