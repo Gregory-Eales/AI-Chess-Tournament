@@ -138,6 +138,5 @@ class ChessGUI(object):
 
 
 
-chess = Chess()
-chess_gui = ChessGUI(720, chess.board)
+
 
