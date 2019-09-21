@@ -1,6 +1,6 @@
 # AI-Chess-Tournament
 
-This is a battle between the top AI algorithms made from scratch, for the title of chess champion
+This is a battle between the top AI algorithms, for the title of chess champion
 
 <p align="left">
   <img src="https://github.com/Gregory-Eales/AI-Chess-Tournament/blob/master/Chess/example_game.png" width="500"/>
